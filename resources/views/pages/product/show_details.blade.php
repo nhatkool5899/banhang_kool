@@ -3,7 +3,10 @@
 @foreach ($product_details as $item => $pd_details)
 
 <div class="product-details"><!--product-details-->
-        
+    
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v13.0" nonce="uOv3RWts"></script>
+
     <div class="col-sm-5">
         <div class="view-product">
             <img src="{{URL::to('public/upload/product/'.$pd_details->product_img)}}" alt="{{$pd_details->product_img}}" />
@@ -94,19 +97,28 @@
         </div>
         
         <div class="tab-pane fade" id="comment" >
-            <div class="col-sm-3">
-                <div class="product-image-wrapper">
-                    <div class="single-products">
-                        <div class="productinfo text-center">
-                            <img src="public/front-end/images/home/gallery3.jpg" alt="" />
-                            <h2>$56</h2>
-                            <p>Easy Polo Black Edition</p>
-                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                        </div>
-                        
-                    </div>
+            <input type="hidden" value="{{$pd_details->product_id}}" class="comment_product_id">
+            {{-- <input type="hidden" value="{{session()->get('customer_name')}}" class="customer_name"> --}}
+            <form class="col-sm-12">
+                {{ csrf_field() }}
+                <label class="col-sm-2 control-label">Bình luận:</label>
+                <div class="col-sm-6">
+                    <textarea style="resize: none" class="form-control add_comment" name="add_comment" id="" cols="30" rows="5" placeholder="Nhập vào bình luận..."></textarea>
                 </div>
+                <div class="col-sm-2 col-sm-offset-6">
+                    <input type="button" id="submit_comment" class="btn btn-primary pull-right" value="GỬI" style="padding: 6px 26px; margin-top:10px">
+                </div>
+            </form>
+
+            <h4 style="margin: 10px;">Tất cả bình luận</h4>
+            <div class="comment-body" id="comment_show" style="margin-bottom:50px">
+
             </div>
+
+
+            
+            {{-- comment bằng fb --}}
+            {{-- <div class="fb-comments" data-href="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpermalink.php%3Fstory_fbid%3D350964513734855%26id%3D100076104369952%26substory_index%3D350964513734855&show_text=true&width=500"></div> --}}
         </div>
 
         <div class="tab-pane fade" id="reviews" >
@@ -116,107 +128,32 @@
                     <li><a href=""><i class="fa fa-clock-o"></i>12:41 PM</a></li>
                     <li><a href=""><i class="fa fa-calendar-o"></i>31 DEC 2014</a></li>
                 </ul>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                <p><b>Write Your Review</b></p>
-                
-                <form action="#">
-                    <span>
-                        <input type="text" placeholder="Your Name"/>
-                        <input type="email" placeholder="Email Address"/>
-                    </span>
-                    <textarea name="" ></textarea>
-                    <b>Rating: </b> <img src="images/product-details/rating.png" alt="" />
-                    <button type="button" class="btn btn-default pull-right">
-                        Submit
-                    </button>
-                </form>
-            </div>
-        </div>
-        
-        <div class="tab-pane fade" id="sunglass" >
-            <div class="col-sm-3">
-                <div class="product-image-wrapper">
-                    <div class="single-products">
-                        <div class="productinfo text-center">
-                            <img src="public/front-end/images/home/gallery3.jpg" alt="" />
-                            <h2>$56</h2>
-                            <p>Easy Polo Black Edition</p>
-                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                        </div>
-                        
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="product-image-wrapper">
-                    <div class="single-products">
-                        <div class="productinfo text-center">
-                            <img src="public/front-end/images/home/gallery2.jpg" alt="" />
-                            <h2>$56</h2>
-                            <p>Easy Polo Black Edition</p>
-                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                        </div>
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="tab-pane fade" id="kids" >
-            <div class="col-sm-3">
-                <div class="product-image-wrapper">
-                    <div class="single-products">
-                        <div class="productinfo text-center">
-                            <img src="public/front-end/images/home/gallery1.jpg" alt="" />
-                            <h2>$56</h2>
-                            <p>Easy Polo Black Edition</p>
-                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                        </div>
-                        
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-sm-3">
-                <div class="product-image-wrapper">
-                    <div class="single-products">
-                        <div class="productinfo text-center">
-                            <img src="public/front-end/images/home/gallery4.jpg" alt="" />
-                            <h2>$56</h2>
-                            <p>Easy Polo Black Edition</p>
-                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                        </div>
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="tab-pane fade" id="poloshirt" >
-            <div class="col-sm-3">
-                <div class="product-image-wrapper">
-                    <div class="single-products">
-                        <div class="productinfo text-center">
-                            <img src="public/front-end/images/home/gallery2.jpg" alt="" />
-                            <h2>$56</h2>
-                            <p>Easy Polo Black Edition</p>
-                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                        </div>
-                        
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="product-image-wrapper">
-                    <div class="single-products">
-                        <div class="productinfo text-center">
-                            <img src="public/front-end/images/home/gallery4.jpg" alt="" />
-                            <h2>$56</h2>
-                            <p>Easy Polo Black Edition</p>
-                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                        </div>
-                        
-                    </div>
+                <div class="rating-body">
+                    <form>
+                        {{ csrf_field() }}
+                        <h4 class="title-rating">Đánh giá ngay:</h4>
+                        <ul class="list-inline rating" id="rating" title="Average Rating">
+                            @for ($i = 1; $i <= 5; $i++)
+                                @php
+                                    if($i < $rating){
+                                        $color ='color:#ffcc00';
+                                    }else {
+                                        $color = 'color:#ccc';
+                                    }
+                                @endphp
+                            <li title="star_rating"
+                            id="{{$pd_details->product_id}}-{{$i}}"
+                            data-index="{{$i}}"
+                            data-product_id="{{$pd_details->product_id}}"
+                            data-rating="{{$rating}}"
+                            class="rating"
+                            style="cursor: pointer; {{$color}}; font-size:40px;font-weight:500">
+                                &#9733;
+                            </li>
+    
+                            @endfor
+                        </ul>
+                    </form>
                 </div>
             </div>
         </div>
@@ -279,7 +216,7 @@
                 </div>
                 @endforeach 
             </div>
-            <div class="item">	
+            {{-- <div class="item">	
                 <div class="col-sm-4">
                     <div class="product-image-wrapper">
                         <div class="single-products">
@@ -293,7 +230,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
    
             <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">

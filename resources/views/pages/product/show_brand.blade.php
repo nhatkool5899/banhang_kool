@@ -28,7 +28,7 @@
     
                             <a href="{{URL::to('chi-tiet-san-pham/'.$product->product_id)}}" class="link-product-details">
                             </a>
-                            <img src="{{URL::to('public/upload/product/'.$product->product_img)}}" alt="" />
+                            <img src="{{URL::to('public/upload/product/'.$product->product_img)}}" alt="" style="height: 220px"/>
                             <div class="product-info-details">
                                 <p>{{$product->product_name}}</p>
                                 <div class="product-price-sold">

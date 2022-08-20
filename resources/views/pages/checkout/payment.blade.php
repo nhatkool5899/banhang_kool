@@ -171,6 +171,28 @@
                                     </div>
                                 </td>
                             </tr>
+                            <tr><td style="height: 40px"></td></tr>
+                            <tr>
+                                <td colspan="3" class="panel-body panel-body-style" style="margin-top:20px">
+                                    <p class="text-center">Thông tin chi tiết</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-size: 16px">
+                                    <p>Tên người nhận:</p>
+                                    <p>Số điện thoại:</p>
+                                    <p>Địa chỉ:</p>
+                                    <p>Lời nhắn:</p>
+                                </td>
+                                <td style="font-size: 16px">
+                                    @foreach ($show_shipping as $item => $shipping)
+                                    <p>{{$shipping->shipping_name}}</p>
+                                    <p>{{$shipping->shipping_phone}}</p>
+                                    <p>{{$shipping->shipping_address}}</p>
+                                    <p>{{$shipping->shipping_message}}</p>
+                                    @endforeach
+                                </td>
+                            </tr>
                         @else
                             <tr>
                                 <td></td>
@@ -207,6 +229,9 @@
                         </td>
                     </tr>
                     @endif
+                    <tr>
+                        <td><a href="{{URL::to('/add-shipping/'.session()->get('customer_id'))}}" class="btn btn-default check_out">Thêm địa chỉ giao hàng mới</a></td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -215,15 +240,66 @@
             <div class="payment-option-title">Hình thức thanh toán</div>
             <div class="payment-options">
                 <span>
-                    <label><input type="radio" name="payment_method" value="1"> Thanh toán qua thẻ</label>
+                    <label><input type="radio" name="payment_method" value="1" size="20"><i class="fa-solid fa-credit-card"></i> Thanh toán qua thẻ</label>
                 </span>
                 <span>
-                    <label><input type="radio" name="payment_method" value="2"> Thanh toán khi nhận hàng</label>
+                    <label><input type="radio" name="payment_method" value="2"><i class="fa-solid fa-money-bill-1-wave"></i> Thanh toán khi nhận hàng</label>
                 </span>
-                <span>
+                {{-- <span>
                     <label><input type="radio" name="payment_method" value="3"> Paypal</label>
-                </span>
+                </span> --}}
             </div>
+                <div style="position: relative; top:20px; margin-bottom:20px">
+                    @php
+                    $vnd_to_usd = $total / 23087.05;
+                    @endphp
+                    <div id="paypal-button"></div> 
+                    <input type="hidden" id="vnd_to_usd" value="{{round($vnd_to_usd,2)}}">
+                </div>
+                    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+                    <script>
+                        var usd = document.getElementById('vnd_to_usd').value;
+                        // alert(usd);
+                      paypal.Button.render({
+                        // Configure environment
+                        env: 'sandbox',
+                        client: {
+                          sandbox: 'AYY3ht16EQxOyQ_s7BIPoWRfUJG-dg_FWtHn4PMyVmFBnZFkYla-beKlF4UHL1G7ZkqNFseX-zSsc2iz',
+                          production: 'demo_production_client_id'
+                        },
+                        // Customize button (optional)
+                        locale: 'en_US',
+                        style: {
+                          size: 'large',
+                          color: 'gold',
+                          shape: 'pill',
+                        },
+                    
+                        // Enable Pay Now checkout flow (optional)
+                        commit: true,
+                    
+                        // Set up a payment
+                        payment: function(data, actions) {
+                          return actions.payment.create({
+                            transactions: [{
+                              amount: {
+                                total: `${usd}`,
+                                currency: 'USD'
+                              }
+                            }]
+                          });
+                        },
+                        // Execute the payment
+                        onAuthorize: function(data, actions) {
+                          return actions.payment.execute().then(function() {
+                            // Show a confirmation message to the buyer
+                            window.alert('Bạn đã thanh toán thành công!');
+                            window.location.href = "{{url('/order-place-paypal')}}";
+                          });
+                        }
+                      }, '#paypal-button');
+                    
+                    </script>
             <input type="submit" name="send_order" class="btn btn-default check_out" value="ĐẶT HÀNG NGAY" style="font-size: 18px">
         </form> 
     </div>

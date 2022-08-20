@@ -16,9 +16,9 @@
     <link href="{{asset('public/front-end/css/prettyPhoto.css')}}" rel="stylesheet">
     <link href="{{asset('public/front-end/css/price-range.css')}}" rel="stylesheet">
     <link href="{{asset('public/front-end/css/animate.css')}}" rel="stylesheet">
-	<link href="{{asset('public/front-end/css/main23.css')}}" rel="stylesheet">
+	<link href="{{asset('public/front-end/css/main.css')}}" rel="stylesheet">
 	<link href="{{asset('public/front-end/css/responsive.css')}}" rel="stylesheet">
-	<link href="{{asset('public/front-end/css/style_sign6.css')}}" rel="stylesheet">
+	<link href="{{asset('public/front-end/css/style_sign8.css')}}" rel="stylesheet">
 	<link href="{{asset('public/front-end/css/sweetalert.css')}}" rel="stylesheet">      
 </head><!--/head-->
 
@@ -63,7 +63,7 @@
 									<a href="{{URL::to('/trang-chu')}}"><img src="{{asset('public/front-end/images/home/logo.png')}}" alt="" /></a>
 								</div>
 							</div>
-							<div class="col-sm-5 header-middle-child" style="display: flex; padding: 0">
+							<div class="col-sm-4 header-middle-child" style="display: flex; padding: 0">
 								<form action="{{URL::to('/tim-kiem')}}" method="post">
 									{{ csrf_field() }}
 									<div class="pull-left">
@@ -74,9 +74,20 @@
 									</div>
 								</form>
 							</div>
-							<div class="col-sm-5 header-middle-child">
+							<div class="col-sm-6 header-middle-child">
 								<div class="shop-menu pull-right">
 									<ul class="nav navbar-nav">
+										<?php
+										if(session()->get('customer_id')){
+											?>
+											<li><a href="{{URL::to('/wishlist/'.session()->get('customer_id'))}}"><i class="fa-solid fa-heart" style="font-size: 16px"></i>Yêu thích</a></li>
+											<?php
+										}else{
+											?>
+											<li class="check-account"><a href="#"><i class="fa-solid fa-heart" style="font-size: 16px"></i>Yêu thích</a></li>
+											<?php
+										}
+										?>
 										<?php
 										if(session()->get('customer_id')){
 											$customer_name = session()->get('customer_name');
@@ -85,7 +96,7 @@
 											<?php
 										}else{
 											?>
-											<li id="check-account"><a href="#"><i class="fa-brands fa-shopify" style="font-size: 16px"></i>Đơn hàng</a></li>
+											<li class="check-account"><a href="#"><i class="fa-brands fa-shopify" style="font-size: 16px"></i>Đơn hàng</a></li>
 											<?php
 										}
 										?>
@@ -160,6 +171,10 @@
 												<button type="button" class="form-submit btn-signin">Đăng nhập</button>
 											</div>
 											<a href="#" class="forgot">Forgot Password?</a>
+											<div class="login-more">
+												<a><img style="width: 32px; height:32px" src="{{asset('public/front-end/images/home/googles_icon.png')}}" alt="">Google</a>
+												<a><img src="{{asset('public/front-end/images/home/facebook_icon.png')}}" alt="">Facebook</a>
+											</div>
 										</form>
 									</div>
 						
@@ -260,6 +275,55 @@
 											</ul>
 										</span>
 									</div>
+									<a href="#" class="header-blog">
+										<i class="fa-solid fa-blog"></i>
+										Tin tức
+									</a>
+									<div href="#" class="header-blog show-weather" style="cursor: pointer">
+										<i class="fa-solid fa-cloud-sun"></i>
+										Thời tiết
+									</div>
+									<div class="modal-weather night">
+										<div class="weather" id="weather"> 
+											<input type="text" class="search" placeholder="search...">
+											<div class="content">
+												<h1 class="capital">
+													<span class="city">Ha Noi</span>
+													<span>,</span>
+													<span class="country">VN</span>
+												</h1>
+												<div class="datetime">
+													25/04/2022, 3:25:16 PM
+												</div>
+												<div class="temperature">
+													<span>
+														<span class="value">23</span>
+														<sup>o</sup>C
+													</span>
+												</div>
+												<div class="short-desc">
+													Clouds
+												</div>
+												<div class="desc">
+													Clouds description
+												</div>
+												<div class="more-desc">
+													<div class="visibility">
+														<i class="fas fa-eye"></i>
+														<span>1000 (m)</span>
+													</div>
+													<div class="wind">
+														<i class="fas fa-wind"></i>
+														<span>10.5 (m/s)</span>
+													</div>
+													<div class="sun">
+														<i class="fas fa-cloud-sun"></i>
+														<span>10 (%)</span>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 							
@@ -282,7 +346,7 @@
 						<div class="col-sm-2">
 							<div class="companyinfo">
 								<h2><span>e</span>-shopper</h2>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor</p>
+								<p>Dev-Kool mang đến sự tin tưởng, chất lượng cho khách hàng</p>
 							</div>
 						</div>
 						<div class="col-sm-7">
@@ -290,11 +354,9 @@
 								<div class="video-gallery text-center">
 									<a href="#">
 										<div class="iframe-img">
-											<img src="images/home/iframe1.png" alt="" />
+											<img src="https://cdn.tgdd.vn/2021/10/banner/appleDT-390x210-1.png" alt="" />
 										</div>
-										<div class="overlay-icon">
-											<i class="fa fa-play-circle-o"></i>
-										</div>
+									
 									</a>
 									<p>Circle of Hands</p>
 									<h2>24 DEC 2014</h2>
@@ -305,11 +367,9 @@
 								<div class="video-gallery text-center">
 									<a href="#">
 										<div class="iframe-img">
-											<img src="images/home/iframe2.png" alt="" />
+											<img src="https://cdn.tgdd.vn/2022/05/banner/Yoga-GamingLaptop-copy-390x210.png" alt="" />
 										</div>
-										<div class="overlay-icon">
-											<i class="fa fa-play-circle-o"></i>
-										</div>
+									
 									</a>
 									<p>Circle of Hands</p>
 									<h2>24 DEC 2014</h2>
@@ -320,11 +380,9 @@
 								<div class="video-gallery text-center">
 									<a href="#">
 										<div class="iframe-img">
-											<img src="images/home/iframe3.png" alt="" />
+											<img src="https://cdn.tgdd.vn/2022/05/banner/samsung-390-210-390x210.png" alt="" />
 										</div>
-										<div class="overlay-icon">
-											<i class="fa fa-play-circle-o"></i>
-										</div>
+								
 									</a>
 									<p>Circle of Hands</p>
 									<h2>24 DEC 2014</h2>
@@ -335,11 +393,9 @@
 								<div class="video-gallery text-center">
 									<a href="#">
 										<div class="iframe-img">
-											<img src="images/home/iframe4.png" alt="" />
+											<img src="https://cdn.tgdd.vn/2022/04/banner/sport380x2002x-760x400-1.png" alt="" />
 										</div>
-										<div class="overlay-icon">
-											<i class="fa fa-play-circle-o"></i>
-										</div>
+									
 									</a>
 									<p>Circle of Hands</p>
 									<h2>24 DEC 2014</h2>
@@ -444,26 +500,136 @@
     <script src="{{asset('public/front-end/js/jquery.prettyPhoto.js')}}"></script>
     <script src="{{asset('public/front-end/js/main.js')}}"></script>
     <script src="{{asset('public/front-end/js/sweetalert.js')}}"></script>
+    <script src="{{asset('public/front-end/js/weather.js')}}"></script>
     <script src="{{asset('public/front-end/js/validator.js')}}"></script>
-	{{-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> --}}
 
-	<script>
-        const signinBtn = document.querySelector('.signinBtn')
-        const signupBtn = document.querySelector('.signupBtn')
-        const formBx = document.querySelector('.formBx');
-        const check_login = document.querySelector('.check-login')
 
-        signupBtn.onclick = function() {
-            formBx.classList.add('active')
-            check_login.classList.add('active')
-        }
-        signinBtn.onclick = function() {
-            formBx.classList.remove('active')
-            check_login.classList.remove('active')
-        }
-    </script>
+	{{-- <div class="zalo-chat-widget" data-oaid="579745863508352884" data-welcome-message="Chào bạn!" data-autopopup="10" data-width="" data-height=""></div>
+	<script src="https://sp.zalo.me/plugins/sdk.js"></script> --}}
 
 <script>
+	const signinBtn = document.querySelector('.signinBtn')
+	const signupBtn = document.querySelector('.signupBtn')
+	const formBx = document.querySelector('.formBx');
+	const check_login = document.querySelector('.check-login')
+
+	signupBtn.onclick = function() {
+		formBx.classList.add('active')
+		check_login.classList.add('active')
+	}
+	signinBtn.onclick = function() {
+		formBx.classList.remove('active')
+		check_login.classList.remove('active')
+	}
+</script>
+
+
+<script type="text/javascript">
+	//-----Comment-------//
+	$(document).ready(function(){
+
+		var product_id = $('.comment_product_id').val();
+		var _token = $('input[name="_token"]').val();
+
+		$.ajax({
+			url: '{{url('/load-comment')}}',
+			method: 'POST',
+			data:{product_id:product_id, _token:_token},
+			success:function(data){
+				$('#comment_show').html(data);
+			}
+		});
+
+		//Đánh giá
+		function remove_background(product_id){
+			for(var count = 1; count <= 5 ; count++){
+				$('#'+product_id+'-'+count).css('color','#ccc');
+			}
+		}
+	
+		//hover đánh giá sao
+		$(document).on('mouseenter','.rating',function(){
+			var index = $(this).data('index');
+			var product_id = $(this).data('product_id');
+			remove_background(product_id);
+			for (let count = 1; count <= index; count++) {
+				$('#'+product_id+'-'+count).css('color','#ffcc00');
+				
+			}
+		});
+
+		$('.rating').click(function(){
+			var index = $(this).data('index');
+			var product_id = $(this).data('product_id');
+			var _token = $('input[name="_token"]').val();
+
+			$.ajax({
+			url: '{{url('/insert-rating')}}',
+			method: 'POST',
+			data:{index:index,product_id:product_id, _token:_token},
+			success:function(data){
+				if(data == 'done'){
+					swal('Đánh giá thành công');
+				}else{
+					swal('Lỗi đánh giá');
+				}
+			}
+		});
+		})
+	})
+</script>
+
+<script>
+	$('#submit_comment').click(function(){
+		var product_id = $('.comment_product_id').val();
+		// var customer_name = $('.customer_name').val();
+		var add_comment = $('.add_comment').val();
+		var _token = $('input[name="_token"]').val();
+	
+		$.ajax({
+			url: '{{url('/add-comment')}}',
+			method: 'POST',
+			data:{product_id:product_id,add_comment:add_comment, _token:_token},
+			success:function(data){
+				location.reload();
+			}
+		});
+	});
+//-----Comment-------//
+</script>
+<script type="text/javascript">
+	//$(document).ready(function(){
+	
+		// $(document).on('mouseleave','.rating',function(){
+		// 	var index = $(this).data('index');
+		// 	var product_id = $(this).data('product_id');
+		// 	var rating = $(this).data('rating');
+		// 	remove_background(product_id);
+		// 	for (let count = 1; count <= rating; count++) {
+		// 		$('#'+product_id+'-'+count).css('color','#ffcc00');
+				
+		// 	}
+		// });
+
+	//});
+//-----Comment-------//
+</script>
+
+<script>
+	//-----Modal Weather-----//
+	$('.show-weather').click(function(){
+		$('.modal-weather').addClass('show-modal');
+	});
+	$('.modal-weather').click(function(e){
+		if(e.target == e.currentTarget){
+			$(this).removeClass('show-modal');
+		}
+	});
+
+</script>
+
+<script>
+	//----DayNight----//
 	$('.day-icon-night').click(function(){
 		$('.day-icon-night').removeClass('active-dayNight');
 		$('.day-icon-day').addClass('active-dayNight');
@@ -479,22 +645,46 @@
 
 </script>
 
-	<script>
-		$('.link-login-customer').click(function(){
-			$('.modal-sign').addClass('show-sign');
-		});
-		$('#btn-close-login').click(function(){
-			$('.modal-sign').removeClass('show-sign');
-		});
-		$('.modal-sign').click(function(e){
-			if(e.target == e.currentTarget){
-				$(this).removeClass('show-sign');
+<script>
+	//-----Modal SignIn-----//
+	$('.link-login-customer').click(function(){
+		$('.modal-sign').addClass('show-sign');
+	});
+	$('#btn-close-login').click(function(){
+		$('.modal-sign').removeClass('show-sign');
+	});
+	$('.modal-sign').click(function(e){
+		if(e.target == e.currentTarget){
+			$(this).removeClass('show-sign');
+		}
+	});
+
+</script>
+
+<script type="text/javascript">
+	$('.btn-signin').click(function(){
+		var customer_email = $('#user-email').val();
+		var customer_password = $('#user-password').val();
+		var _token = $('input[name="_token"]').val();
+
+		$.ajax({
+			url: '{{url('/login-customer')}}',
+			method: 'POST',
+			data:{customer_email:customer_email, customer_password:customer_password, _token:_token},
+			success:function(data){
+				if(data == 'success'){
+					location.reload();
+				}
+				else{
+					$('.box-message').addClass('show-error-message');
+				}
 			}
 		});
-	
-	</script>
+	})
+</script>
 
 <script>
+	//-----Ordered-----//
 	$('#show-ordered').click(function(){
 		$('.box-ordered').addClass('show-box-ordered');
 		$('#show-ordered').css('display','none');
@@ -507,28 +697,6 @@
 	});
 
 </script>
-
-	<script type="text/javascript">
-		$('.btn-signin').click(function(){
-			var customer_email = $('#user-email').val();
-			var customer_password = $('#user-password').val();
-			var _token = $('input[name="_token"]').val();
-
-			$.ajax({
-                url: '{{url('/login-customer')}}',
-                method: 'POST',
-                data:{customer_email:customer_email, customer_password:customer_password, _token:_token},
-                success:function(data){
-                   if(data == 'success'){
-					   	location.reload();
-				   }
-				   else{
-						$('.box-message').addClass('show-error-message');
-				   }
-                }
-            });
-		})
-	</script>
 
 <script>
 	// mục tiêu 
@@ -571,7 +739,7 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 //Test account
-			$('#check-account').click(function(){
+			$('.check-account').click(function(){
 				swal("Bạn chưa đăng nhập!", "Vui lòng đăng nhập để xem hồ sơ!", "warning");
 			})		
 			$('#check-cart').click(function(){
@@ -656,12 +824,12 @@
 	</script>
 	<script>
 		$('.calculate_delivery').click(function (){
-			var matp = $('.city').val(); 
+			var matp = $('#city').val(); 
 			var maqh = $('.province').val(); 
 			var xaid = $('.wards').val(); 
             var _token = $('input[name="_token"]').val();
 			if(matp=='' || maqh=='' || xaid==''){
-				swal("Địa chỉ giao hàng rỗng!", "Vui lòng chọn địa chỉ để thực hiện thanh toán", "warning");
+				swal("Chưa chọn nơi giao hàng!", "Vui lòng chọn nơi giao hàng", "warning");
 			}else{
 
 				$.ajax({
@@ -675,5 +843,36 @@
 			}
 		});
 	</script>
+
+		<!-- Messenger Plugin chat Code -->
+		<div id="fb-root"></div>
+
+		<!-- Your Plugin chat code -->
+		<div id="fb-customer-chat" class="fb-customerchat">
+		</div>
+	
+		<script>
+		  var chatbox = document.getElementById('fb-customer-chat');
+		  chatbox.setAttribute("page_id", "107846608420391");
+		  chatbox.setAttribute("attribution", "biz_inbox");
+		</script>
+	
+		<!-- Your SDK code -->
+		<script>
+		  window.fbAsyncInit = function() {
+			FB.init({
+			  xfbml            : true,
+			  version          : 'v13.0'
+			});
+		  };
+	
+		  (function(d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) return;
+			js = d.createElement(s); js.id = id;
+			js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+			fjs.parentNode.insertBefore(js, fjs);
+		  }(document, 'script', 'facebook-jssdk'));
+		</script>
 </body>
 </html>

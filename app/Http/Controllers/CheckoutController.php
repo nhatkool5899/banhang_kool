@@ -19,6 +19,7 @@ use App\Models\thanhpho;
 use App\Models\quanhuyen;
 use App\Models\xathitran;
 use App\Models\order_details;
+use Carbon\Carbon;
 use Darryldecode\Cart\Cart;
 use Nette\Utils\Random;
 use phpDocumentor\Reflection\Types\Null_;
@@ -85,10 +86,35 @@ class CheckoutController extends Controller
         
     }
 
-    public function show_checkout(){
+    public function show_checkout($customer_id){
         $cat_pd = DB::table('tbl_category_product')->orderBy('category_id', 'desc')->get();
         $brand_pd = DB::table('tbl_brand_product')->orderBy('brand_id', 'desc')->get();
-        return view('pages.checkout.show_checkout')->with('category', $cat_pd)->with('brand', $brand_pd);
+        $show_shipping = DB::table('tbl_shipping')->where('customer_id', $customer_id)->limit(1)->get();
+        return view('pages.checkout.create_shipping')->with('category', $cat_pd)->with('brand', $brand_pd)->with('show_shipping',$show_shipping);
+    }
+
+    public function add_shipping($customer_id){
+        $cat_pd = DB::table('tbl_category_product')->orderBy('category_id', 'desc')->get();
+        $brand_pd = DB::table('tbl_brand_product')->orderBy('brand_id', 'desc')->get();
+        $show_shipping = DB::table('tbl_shipping')->where('customer_id', $customer_id)->limit(1)->get();
+        return view('pages.checkout.add_shipping')->with('category', $cat_pd)->with('brand', $brand_pd)->with('show_shipping',$show_shipping);
+    }
+
+    public function update_shipping(Request $request, $customer_id){
+        $data = $request->all();
+        // print_r($data);
+
+        $shipping = shipping::where('customer_id', $customer_id)->first();
+        $shipping->shipping_name = $data['shipping_name'];
+        $shipping->shipping_email = $data['shipping_email'];
+        $shipping->shipping_phone = $data['shipping_phone'];
+        $shipping->shipping_address = $data['shipping_address'];
+        $shipping->shipping_message = $data['shipping_message'];
+
+        $shipping->save();
+        
+
+        return Redirect('/payment/'.$customer_id);
     }
 
     public function save_checkout_customer(Request $request, $customer_id){
@@ -114,16 +140,17 @@ class CheckoutController extends Controller
 
         session()->put('shipping_id', $shipping_id);
 
-        return Redirect('/payment');
+        return Redirect('/payment/'.$customer_id);
     }
 
-    public function payment()
+    public function payment($customer_id)
     {
         $cat_pd = DB::table('tbl_category_product')->orderBy('category_id', 'desc')->get();
         $brand_pd = DB::table('tbl_brand_product')->orderBy('brand_id', 'desc')->get();
         $thanhpho = thanhpho::orderby('matp', 'ASC')->get();
+        $show_shipping = DB::table('tbl_shipping')->where('customer_id', $customer_id)->limit(1)->get();
         // $quanhuyen = quanhuyen::orderby('maqh', 'ASC')->get();
-        return view('pages.checkout.payment')->with('category', $cat_pd)->with('brand', $brand_pd)->with('thanhpho', $thanhpho);
+        return view('pages.checkout.payment')->with('category', $cat_pd)->with('brand', $brand_pd)->with('thanhpho', $thanhpho)->with('show_shipping',$show_shipping);
     }
 
     public function order_place(Request $request)
@@ -142,6 +169,13 @@ class CheckoutController extends Controller
         $order->order_total = session()->get('total');
         $order->order_status = 0;
         $order->order_code = substr(md5(microtime()),rand(0,26),5);
+
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
+        $today = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d H:i:s');
+
+        $order_date = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d');
+        $order->created_at = $today;
+        $order->order_date = $order_date;
         if(session()->get('coupon')){
             foreach (session()->get('coupon') as $key => $coupon) {
                 if(($coupon['coupon_condition'] == 1)){
@@ -160,7 +194,7 @@ class CheckoutController extends Controller
             $order->order_feeship = 0;
         }
         $order->order_status = 0;
-        date_default_timezone_set('Asia/Ho_Chi_Minh');
+        // date_default_timezone_set('Asia/Ho_Chi_Minh');
         $order->save();
 
         foreach (session()->get('cart') as $key => $value) {
@@ -192,6 +226,72 @@ class CheckoutController extends Controller
             echo "paypal";
         }
         // return Redirect::to('/payment');
+    }
+
+    public function order_place_paypal()
+    {
+        $payment = new payment();
+
+        $payment->payment_method = '3';
+        $payment->payment_status = 'Đang chờ xử lí';
+        $payment->save();
+
+        $order = new order();
+        $order->customer_id = session()->get('customer_id');
+        $order->shipping_id =  session()->get('shipping_id');
+        $order->payment_id = $payment->payment_id;
+        $order->order_total = session()->get('total');
+        $order->order_status = 0;
+        $order->order_code = substr(md5(microtime()),rand(0,26),5);
+
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
+        $today = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d H:i:s');
+
+        $order_date = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d');
+        $order->created_at = $today;
+        $order->order_date = $order_date;
+        if(session()->get('coupon')){
+            foreach (session()->get('coupon') as $key => $coupon) {
+                if(($coupon['coupon_condition'] == 1)){
+                    $order->order_coupon = $coupon['coupon_number'].'%';
+                }else{
+                    $order->order_coupon = $coupon['coupon_number'].'VNĐ';
+                }
+            }
+        }else{
+            $order->order_coupon = '0';
+        }
+        
+        if(session()->get('fee')){
+            $order->order_feeship = session()->get('fee');
+        }else{
+            $order->order_feeship = 0;
+        }
+        $order->order_status = 0;
+        // date_default_timezone_set('Asia/Ho_Chi_Minh');
+        $order->save();
+
+        foreach (session()->get('cart') as $key => $value) {
+            
+            $order_details = new order_details();
+            $order_details->order_id = $order->order_id;
+            $order_details->product_id = $value['product_id'];
+            $order_details->product_name = $value['product_name'];
+            $order_details->product_image = $value['product_image'];
+            $order_details->product_desc = $value['product_desc'];
+            $order_details->product_price = $value['product_price'];
+            $order_details->product_order_quantity = $value['product_qty'];
+            $order_details->save();
+        }
+
+        $cat_pd = DB::table('tbl_category_product')->orderBy('category_id', 'desc')->get();
+        $brand_pd = DB::table('tbl_brand_product')->orderBy('brand_id', 'desc')->get();
+
+        session()->forget('cart');
+        session()->forget('coupon');
+        session()->forget('total');
+        session()->forget('fee');
+        return Redirect::to('/ordered/'.session()->get('customer_id'));
     }
 
     
@@ -238,4 +338,8 @@ class CheckoutController extends Controller
         }
 
     }
+
+    // public function show_shipping($customer_id){
+    //     $show_shipping = DB::table('tbl_shipping')->where('customer_id', $customer_id)->get();
+    // }
 }

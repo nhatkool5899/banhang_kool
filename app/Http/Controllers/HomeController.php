@@ -20,11 +20,53 @@ class HomeController extends Controller
         $cat_pd = DB::table('tbl_category_product')->where('category_status', 0)->orderBy('category_id', 'desc')->get();
         $brand_pd = DB::table('tbl_brand_product')->where('brand_status', 0)->orderBy('brand_id', 'desc')->get();
 
-        $new_product = DB::table('tbl_product')->where('product_status', 0)->orderBy('product_id', 'desc')->limit(8)->get();
-        $home_product = DB::table('tbl_product')->where('product_status', 0)->limit(6)->get();
-        $all_product = DB::table('tbl_product')->where('product_status', 0)->get();
+        // $new_product = DB::table('tbl_product')->where('product_status', 0)->orderBy('product_id', 'desc')->limit(8)->get();
+        $phone_product = DB::table('tbl_product')->where('product_status', 0)->where('category_id', 1)->orderBy('product_id', 'desc')->limit(8)->get();
+        $laptop_product = DB::table('tbl_product')->where('product_status', 0)->where('category_id', 2)->orderBy('product_id', 'desc')->limit(8)->get();
+        $accessories_product = DB::table('tbl_product')->where('product_status', 0)->where('category_id', 3)->orderBy('product_id', 'desc')->limit(8)->get();
 
-        return view('pages.home')->with('category', $cat_pd)->with('brand', $brand_pd)->with('new_product', $new_product)->with('home_product', $home_product)->with('all_product', $all_product);
+        return view('pages.home')->with('category', $cat_pd)->with('brand', $brand_pd)->with('phone_product', $phone_product)->with('laptop_product', $laptop_product)->with('accessories_product', $accessories_product);
+    }
+
+    public function sort_product(Request $request){
+
+        // Seo
+        $meta_desc = "Shop bán hàng laravel";
+        // Seo
+        $cat_pd = DB::table('tbl_category_product')->where('category_status', 0)->orderBy('category_id', 'desc')->get();
+        $brand_pd = DB::table('tbl_brand_product')->where('brand_status', 0)->orderBy('brand_id', 'desc')->get();
+
+        $sort_by = $request->sort_by;
+       
+        if($sort_by == 'giam_dan'){
+            $pd = DB::table('tbl_product')->where('category_id', 1)->where('product_status', 0)->orderBy('product_price', 'DESC')->get();
+        }elseif($sort_by=='tang_dan'){
+            $pd = DB::table('tbl_product')->where('category_id', 1)->where('product_status', 0)->orderBy('product_price', 'ASC')->get();
+        }elseif($sort_by=='kytu_az'){
+            $pd = DB::table('tbl_product')->where('category_id', 1)->where('product_status', 0)->orderBy('product_name', 'ASC')->get();
+        }elseif($sort_by=='kytu_za'){
+            $pd = DB::table('tbl_product')->where('category_id', 1)->where('product_status', 0)->orderBy('product_name', 'DESC')->get();
+        }else{
+            $pd ='';
+        }
+
+        return view('pages.product.sort_product')->with('category', $cat_pd)->with('brand', $brand_pd)->with('sort_product', $pd);
+    }
+
+    public function filter_price(){
+
+        $cat_pd = DB::table('tbl_category_product')->where('category_status', 0)->orderBy('category_id', 'desc')->get();
+        $brand_pd = DB::table('tbl_brand_product')->where('brand_status', 0)->orderBy('brand_id', 'desc')->get();
+
+        if(isset($_GET['start_price']) && isset($_GET['end_price'])){
+            $start_price = $_GET['start_price']."000000";
+            $end_price = $_GET['end_price']."000000";
+            $pd = DB::table('tbl_product')->whereBetween('product_price', [(int)$start_price,(int)$end_price])->orderBy('product_price','ASC')->get();
+            return view('pages.product.sort_product')->with('category', $cat_pd)->with('brand', $brand_pd)->with('sort_product', $pd);
+        }else{
+            return view('pages.product.sort_product')->with('category', $cat_pd)->with('brand', $brand_pd);
+        }
+
     }
 
     public function search(Request $request){
@@ -40,4 +82,22 @@ class HomeController extends Controller
 
         return view('pages.product.search')->with('category', $cat_pd)->with('brand', $brand_pd)->with('search_product', $search_product);
     }
+
+    public function search_ajax(Request $request){
+        $data = $request->all();
+        $output ='';
+        if($data['keywords']){
+            $product = DB::table('tbl_product')->where('product_name', 'LIKE', '%'.$data['keywords'].'%')->get();
+            
+            $output = '<ul class="suggest-menu">';
+            
+            foreach ($product as $key => $value) {
+                $output .= '<li class="suggest-item"><a href="">'.$value->product_name.'</a></li>';
+            }
+
+            $output .= '</ul>';
+        }
+        echo $output;
+    }
+    
 }

@@ -20,24 +20,27 @@
                         <input type="hidden" value="{{$product->product_id}}" class="cart_product_id_{{$product->product_id}}">
                         <input type="hidden" value="{{$product->product_name}}" class="cart_product_name_{{$product->product_id}}">
                         <input type="hidden" value="{{$product->product_img}}" class="cart_product_image_{{$product->product_id}}">
+                        <input type="hidden" value="{{$product->product_desc}}" class="cart_product_desc_{{$product->product_id}}">
                         <input type="hidden" value="{{$product->product_price}}" class="cart_product_price_{{$product->product_id}}">
                         <input type="hidden" value="1" class="cart_product_qty_{{$product->product_id}}">
 
 
-                        <a href="{{URL::to('chi-tiet-san-pham/'.$product->product_id)}}">
-                            <img src="{{URL::to('public/upload/product/'.$product->product_img)}}" alt="" />
+                        <a href="{{URL::to('chi-tiet-san-pham/'.$product->product_id)}}" class="link-product-details">
                         </a>
-                        <p>{{$product->product_name}}</p>
-                        <div class="product-price-sold">
-                            <span class="product-price">{{number_format($product->product_price,0,',','.')}}.đ</span>
-                            <span class="product-sold">Đã bán 100</span>
-                        </div>
-                        <div class="product-rate-cart">
-                            <div class="product-rate">
-                                <img style="width:75%; margin-top:0" src="{{asset('public/front-end/images/product-details/rating.png')}}" alt=""/>
-                                <span style="color: #ccc; margin-left:4px">10</span>
+                        <img src="{{URL::to('public/upload/product/'.$product->product_img)}}" alt="" style="height: 220px"/>
+                        <div class="product-info-details">
+                            <p>{{$product->product_name}}</p>
+                            <div class="product-price-sold">
+                                <span class="product-price">{{number_format($product->product_price,0,',','.')}}.đ</span>
+                                <span class="product-sold">Đã bán 100</span>
                             </div>
-                            <button type="button" class="btn btn-default add-to-cart" data-id_product="{{$product->product_id}}" name="add-to-cart"><i class="fa-solid fa-cart-plus"></i></button>
+                            <div class="product-rate-cart">
+                                <div class="product-rate">
+                                    <img style="width:75%; margin-top:0" src="{{asset('public/front-end/images/product-details/rating.png')}}" alt=""/>
+                                    <span style="color: #ccc; margin-left:4px">10</span>
+                                </div>
+                                <button type="button" class="btn btn-default add-to-cart" data-id_product="{{$product->product_id}}" name="add-to-cart"><i class="fa-solid fa-cart-plus"></i></button>
+                            </div>
                         </div>
 
                         {{-- <a href="{{URL::to('chi-tiet-san-pham/'.$product->product_id)}}" class="btn btn-default add-to-cart">
@@ -55,6 +58,7 @@
                 </ul>
             </div>
         </div>
+        <div class="items-overlay"></div>
     </div>
     @endforeach
     

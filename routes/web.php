@@ -29,6 +29,9 @@ use App\Http\Controllers\OrderController;
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/trang-chu', [HomeController::class, 'index']);
 Route::post('/tim-kiem', [HomeController::class, 'search']);
+Route::post('/search-ajax', [HomeController::class, 'search_ajax']);
+Route::post('/sort-product', [HomeController::class, 'sort_product']);
+Route::get('/filter-price', [HomeController::class, 'filter_price']);
 
 //Danh mục sp
 Route::get('/danh-muc-san-pham/{category_id}', [CategoryProduct::class, 'show_category']);
@@ -46,6 +49,12 @@ Route::post('/admin-dashboard', [AdminController::class, 'dashboard']);
 
 Route::get('/logout', [AdminController::class, 'log_out']);
 
+Route::post('/filter-by-date', [AdminController::class, 'filter_by_date']);
+Route::get('/order-date', [AdminController::class, 'order_date']);
+Route::post('/dates-order', [AdminController::class, 'dates_order']);
+Route::post('/dashboard-filter', [AdminController::class, 'dashboard_filter']);
+
+
 //Category Product
 
 Route::get('/add-category-product', [CategoryProduct::class, 'add_category_product']);
@@ -58,6 +67,7 @@ Route::get('/active-category-product/{category_id}', [CategoryProduct::class, 'a
 
 Route::post('/save-category-product', [CategoryProduct::class, 'save_category_product']);
 Route::post('/update-category-product/{category_id}', [CategoryProduct::class, 'update_category_product']);
+Route::get('/show-all-product/{category_id}', [CategoryProduct::class, 'show_all_product']);
 
 // Brand Product
 
@@ -84,6 +94,9 @@ Route::get('/active-product/{product_id}', [ProductController::class, 'active_pr
 
 Route::post('/save-product', [ProductController::class, 'save_product']);
 Route::post('/update-product/{product_id}', [ProductController::class, 'update_product']);
+Route::post('/load-comment', [ProductController::class, 'load_comment']);
+Route::post('/add-comment', [ProductController::class, 'add_comment']);
+Route::post('/insert-rating', [ProductController::class, 'insert_rating']);
 
 //Coupon
 Route::post('/check-coupon', [CartController::class, 'check_coupon']);
@@ -108,14 +121,17 @@ Route::get('/del-all', [CartController::class, 'del_all_pd_cart']);
 
 //CheckOut
 
-Route::get('/checkout', [CheckoutController::class, 'show_checkout']);
+Route::get('/checkout/{customer_id}', [CheckoutController::class, 'show_checkout']);
+Route::get('/add-shipping/{customer_id}', [CheckoutController::class, 'add_shipping']);
+Route::post('/update-shipping/{customer_id}', [CheckoutController::class, 'update_shipping']);
 Route::get('/login-checkout', [CheckoutController::class, 'login_checkout']);
 Route::post('/add-customer', [CheckoutController::class, 'add_customer']);
 Route::post('/login-customer', [CheckoutController::class, 'login_customer']);
 Route::get('/logout-customer', [CheckoutController::class, 'logout_customer']);
 Route::post('/save-checkout-customer/{customer_id}', [CheckoutController::class, 'save_checkout_customer']);
-Route::get('/payment', [CheckoutController::class, 'payment']);
+Route::get('/payment/{customer_id}', [CheckoutController::class, 'payment']);
 Route::post('/order-place', [CheckoutController::class, 'order_place']);
+Route::get('/order-place-paypal', [CheckoutController::class, 'order_place_paypal']);
 Route::post('/select-delivery-home', [CheckoutController::class, 'select_delivery_home']);
 Route::post('/calculate-fee', [CheckoutController::class, 'calculate_fee']);
 

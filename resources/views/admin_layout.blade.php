@@ -16,8 +16,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link rel="stylesheet" href="{{asset('public/back-end/css/bootstrap.min.css')}}" >
 <!-- //bootstrap-css -->
 <!-- Custom CSS -->
-<link href="{{asset('public/back-end/css/style.css')}}" rel='stylesheet' type='text/css' />
+<link href="{{asset('public/back-end/css/style2.css')}}" rel='stylesheet' type='text/css' />
 <link href="{{asset('public/back-end/css/style-responsive.css')}}" rel="stylesheet"/>
+<link href="{{asset('public/back-end/css/style_dashboard.css')}}" rel="stylesheet"/>
 <!-- font CSS -->
 <link href='//fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 <!-- font-awesome icons -->
@@ -26,20 +27,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link rel="stylesheet" href="{{asset('public/back-end/css/morris.css')}}" type="text/css"/>
 <!-- calendar -->
 <link rel="stylesheet" href="{{asset('public/back-end/css/monthly.css')}}">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
 <!-- //calendar -->
 <!-- //font-awesome icons -->
 <script src="{{asset('public/back-end/js/jquery2.0.3.min.js')}}"></script>
 <script src="{{asset('public/back-end/js/raphael-min.js')}}"></script>
 <script src="{{asset('public/back-end/js/morris.js')}}"></script>
 </head>
-<body>
+<body id="body-admin">
 <section id="container">
 <!--header start-->
 <header class="header fixed-top clearfix">
 <!--logo start-->
 <div class="brand">
     <a href="index.html" class="logo">
-        VISITORS
+        QUẢN TRỊ AD
     </a>
     <div class="sidebar-toggle-box">
         <div class="fa fa-bars"></div>
@@ -169,11 +171,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</section>
 </section>
  <!-- footer -->
-		  <div class="footer">
+		  {{-- <div class="footer">
 			<div class="wthree-copyright">
 			  <p>© 2017 Visitors. All rights reserved | Design by <a href="http://w3layouts.com">W3layouts</a></p>
 			</div>
-		  </div>
+		  </div> --}}
   <!-- / footer -->
 </section>
 <!--main content end-->
@@ -186,7 +188,103 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="{{asset('public/back-end/js/jquery.scrollTo.js')}}"></script>
 <script src="{{asset('public/back-end/ckeditor/ckeditor.js')}}"></script>
 <script src="{{asset('public/back-end/js/jquery.validate.js')}}"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 <!-- morris JavaScript -->	
+
+<script>
+    $( function() {
+        $( "#datepicker" ).datepicker({
+            prevText: "Tháng trước",
+            nextText: "Tháng sau",
+            dateFormat: "yy-mm-dd",
+            duration: "slow"
+        });
+        $( "#datepicker2" ).datepicker({
+            prevText: "Tháng trước",
+            nextText: "Tháng sau",
+            dateFormat: "yy-mm-dd",
+            duration: "slow"
+        });
+    } );
+</script>
+
+<script>
+    $(document).ready(function(){
+        chart30daysorder();
+        var chart = new Morris.Area({
+            element: 'myfirstchart',
+    
+            lineColors: ['#819c79', '#fc8710', '#ff6541', '#a4add3', '#766856'],
+    
+            pointFillColors: ['#fff'],
+            pointStrokeColors: ['#000'],
+            fillOpacity: 0.6,
+            hideHover: 'auto',
+            parseTime: false,
+    
+            xkey: 'period',
+            ykeys: ['order', 'sales', 'profit', 'quantity'],
+            behaveLikeLine: true,
+            labels: ['đơn hàng', 'doanh số', 'lợi nhuận', 'số lượng']
+        });
+    
+        function chart30daysorder(){
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+            url: '{{url('/dates-order')}}',
+            method: 'POST',
+            dataType: "JSON",
+            data:{_token:_token},
+    
+            success:function(data){
+                chart.setData(data);
+            }
+    
+        });
+        }
+
+        $('#btn-dashboard-filter').click(function(){
+        var _token = $('input[name="_token"]').val();
+        var from_date = $('#datepicker').val();
+        var to_date = $('#datepicker2').val();
+        $.ajax({
+            url: '{{url('/filter-by-date')}}',
+            method: 'POST',
+            dataType: "JSON",
+            data:{from_date:from_date,to_date:to_date,_token:_token},
+
+            success:function(data){
+                chart.setData(data);
+            }
+
+            });
+        });
+
+        $('.dashboard-filter').change(function(){
+        var dashboard_value = $(this).val();
+        var _token = $('input[name="_token"]').val();
+        // alert(dashboard_value);
+
+        $.ajax({
+            url: '{{url('/dashboard-filter')}}',
+            method: 'POST',
+            dataType: "JSON",
+            data:{dashboard_value:dashboard_value,_token:_token},
+
+            success:function(data){
+                chart.setData(data);
+            }
+
+            });
+        });
+    });
+
+</script>
+
+<script>
+
+   
+</script>
 
 <script>
     CKEDITOR.replace('ckeditor');
@@ -243,54 +341,57 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 });
             }
         });
-        //----------------Thêm phí vận chuyển---------------
-        $('.add-delivery').click(function(){
-            var city = $('.city').val();
-            var province = $('.province').val();
-            var wards = $('.wards').val();
-            var fee_ship = $('.fee_ship').val();
-            var _token = $('input[name="_token"]').val();
+    });
+</script>
 
-            $.ajax({
-                url: '{{url('/insert-delivery')}}',
-                method: 'POST',
-                data:{city:city, province:province, wards:wards, fee_ship:fee_ship, _token:_token},
-                success:function(data){
-                    alert('Thêm phí vận chuyển thành công');
-                    fetch_delivery();
-                }
-            });
-        });
+<script>
+    //----------------Thêm phí vận chuyển---------------
+    $('.add-delivery').click(function(){
+        var city = $('.city').val();
+        var province = $('.province').val();
+        var wards = $('.wards').val();
+        var fee_ship = $('.fee_ship').val();
+        var _token = $('input[name="_token"]').val();
 
-        $('.choose').on('change',function(){
-            var action = $(this).attr('id');
-            var ma_id = $(this).val();
-            var _token = $('input[name="_token"]').val();
-            var result = '';
-            if(action == 'city'){
-                result = 'province';
-            }else{
-                result = 'wards';
+        $.ajax({
+            url: '{{url('/insert-delivery')}}',
+            method: 'POST',
+            data:{city:city, province:province, wards:wards, fee_ship:fee_ship, _token:_token},
+            success:function(data){
+                alert('Thêm phí vận chuyển thành công');
+                fetch_delivery();
             }
-            $.ajax({
-                url: '{{url('/select-delivery')}}',
-                method: 'POST',
-                data:{action:action, ma_id:ma_id, _token:_token},
-                success:function(data){
-                    $('#'+result).html(data);
-                }
-            });
+        });
+    });
+
+    $('.choose').on('change',function(){
+        var action = $(this).attr('id');
+        var ma_id = $(this).val();
+        var _token = $('input[name="_token"]').val();
+        var result = '';
+        if(action == 'city'){
+            result = 'province';
+        }else{
+            result = 'wards';
+        }
+        $.ajax({
+            url: '{{url('/select-delivery')}}',
+            method: 'POST',
+            data:{action:action, ma_id:ma_id, _token:_token},
+            success:function(data){
+                $('#'+result).html(data);
+            }
         });
     });
 </script>
 
 <script type="text/javascript">
         //--------Xử lý đơn hàng--------------
-    $(document).ready(function(){
         $('.result_order_details').click(function(){
             var order_status = $('.select_order_details').val();
             var order_id = $('.select_order_details').children(":selected").attr("id");
             var _token = $('input[name="_token"]').val();
+
             //Lấy ra qty
             quantity = [];
             $("input[name='product_quantity']").each(function(){
@@ -317,7 +418,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 }
             });
         });
-    });
 </script>
 <script>
 	$(document).ready(function() {

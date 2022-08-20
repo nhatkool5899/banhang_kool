@@ -49,7 +49,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-lg-offset-3 col-lg-10">
-                                    <button type="button" name="add_delivery" class="btn btn-success add-delivery">Thêm phí vận chuyển</button>
+                                    <button type="button" name="add_delivery" id="add-delivery" class="btn btn-success add-delivery">Thêm phí vận chuyển</button>
                                 </div>
                             </div>
                         </form>

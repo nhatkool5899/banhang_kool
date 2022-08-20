@@ -149,13 +149,13 @@
 							if($check->customer_id == session()->get('customer_id')){
 								session()->put('shipping_id', $check->shipping_id);
 								?>
-								<a class="btn btn-default check_out buy-product-to-cart pull-right" class="" href="{{URL::to('/payment')}}">MUA HÀNG</a>
+								<a class="btn btn-default check_out buy-product-to-cart pull-right" class="" href="{{URL::to('/payment/'.$check->customer_id)}}">MUA HÀNG</a>
 								<?php
 							}
 						}
 						if($i==0){
 							?>
-							<a class="btn btn-default check_out buy-product-to-cart pull-right" class="" href="{{URL::to('/checkout')}}">MUA HÀNG</a>
+							<a class="btn btn-default check_out buy-product-to-cart pull-right" class="" href="{{URL::to('/checkout/'.session()->get('customer_id'))}}">MUA HÀNG</a>
 							<?php	
 						}
 					?>

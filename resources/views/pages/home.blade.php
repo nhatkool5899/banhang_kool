@@ -3,9 +3,9 @@
 <div class="features_items"><!--features_items-->
     <p class="title">
         <span>Điện thoại nổi bật nhất</span>
-        <a href="" class="show-all-phone">Xem tất cả điện thoại</a>
+        <a href="{{URL::to('show-all-product/1')}}" class="show-all-phone">Xem tất cả điện thoại</a>
     </p>
-    @foreach ($new_product as $item =>$product)
+    @foreach ($phone_product as $item =>$product)
     
     <div class="col-sm-3 product-main">
         <div class="product-image-wrapper">
@@ -25,7 +25,7 @@
 
                         <a href="{{URL::to('chi-tiet-san-pham/'.$product->product_id)}}" class="link-product-details">
                         </a>
-                        <img src="{{URL::to('public/upload/product/'.$product->product_img)}}" alt="" />
+                        <img src="{{URL::to('public/upload/product/'.$product->product_img)}}" alt="" style="height: 220px" />
                         <div class="product-info-details">
                             <p>{{$product->product_name}}</p>
                             <div class="product-price-sold">
@@ -65,10 +65,10 @@
 <div class="features_items"><!--features_items-->
     <p class="title">
         <span>Laptop bán chạy nhất</span>
-        <a href="" class="show-all-phone">Xem tất cả Laptop</a>
+        <a href="{{URL::to('show-all-product/2')}}" class="show-all-phone">Xem tất cả Laptop</a>
 
     </p>
-    @foreach ($all_product as $item =>$product)
+    @foreach ($laptop_product as $item =>$product)
     
     <div class="col-sm-3 product-main">
         <div class="product-image-wrapper">
@@ -88,7 +88,7 @@
 
                         <a href="{{URL::to('chi-tiet-san-pham/'.$product->product_id)}}" class="link-product-details">
                         </a>
-                        <img src="{{URL::to('public/upload/product/'.$product->product_img)}}" alt="" />
+                        <img src="{{URL::to('public/upload/product/'.$product->product_img)}}" alt="" style="height: 220px"/>
 
                         <div class="product-info-details">
                             <p>{{$product->product_name}}</p>
@@ -126,10 +126,10 @@
 <div class="features_items"><!--features_items-->
     <p class="title">
         <span>Phụ kiện giá rẻ</span>
-        <a href="" class="show-all-phone">Xem tất cả Laptop</a>
+        <a href="{{URL::to('show-all-product/3')}}" class="show-all-phone">Xem tất cả phụ kiện</a>
 
     </p>
-    @foreach ($all_product as $item =>$product)
+    @foreach ($accessories_product as $item =>$product)
     
     <div class="col-sm-3 product-main">
         <div class="product-image-wrapper">
@@ -149,7 +149,7 @@
 
                         <a href="{{URL::to('chi-tiet-san-pham/'.$product->product_id)}}" class="link-product-details">
                         </a>
-                        <img src="{{URL::to('public/upload/product/'.$product->product_img)}}" alt="" />
+                        <img src="{{URL::to('public/upload/product/'.$product->product_img)}}" alt=""  style="height: 220px"/>
                         <div class="product-info-details">
                             <p>{{$product->product_name}}</p>
                             <div class="product-price-sold">
@@ -196,9 +196,9 @@
                     <div class="single-products">
                         <div class="productinfo text-center">
                             <img src="https://cdn.tgdd.vn/Products/Images/7077/234918/se-40mm-vien-nhom-day-cao-su-den-thumb-600x600.jpg" alt="" />
-                            <h2>500000</h2>
-                            <p>Easy Polo Black Edition</p>
-                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                            <h3 class="text-primary">500.000 đ</h3>
+                            <p  style="background: #f0f0f0">Sang trọng, lịch lãm</p>
+                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Mua ngay</a>
                         </div>
                         
                     </div>
@@ -209,8 +209,34 @@
                     <div class="single-products">
                         <div class="productinfo text-center">
                             <img src="https://bizweb.dktcdn.net/thumb/large/100/095/515/products/1-4dc20b6a-77b7-48f6-9717-1a4a7c83c29a.png" alt="" />
-                            <h2>500000</h2>
-                            <p>Easy Polo Black Edition</p>
+                            <h3 class="text-primary">990.000 đ</h3>
+                            <p style="background: #f0f0f0">Trẻ trung, năng động</p>
+                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="product-image-wrapper">
+                    <div class="single-products">
+                        <div class="productinfo text-center">
+                            <img src="https://cdn.tgdd.vn/Products/Images/7264/231809/elio-el071-01-nam-1-600x600.jpg" alt="" />
+                            <h3 class="text-primary">990.000 đ</h3>
+                            <p style="background: #f0f0f0">Trẻ trung, năng động</p>
+                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="product-image-wrapper">
+                    <div class="single-products">
+                        <div class="productinfo text-center">
+                            <img src="https://cdn.tgdd.vn/Products/Images/7264/269352/elio-ec004-02-nu-thumb-600x600.jpg" alt="" />
+                            <h3 class="text-primary">990.000 đ</h3>
+                            <p style="background: #f0f0f0">Trẻ trung, năng động</p>
                             <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                         </div>
                         
@@ -225,97 +251,8 @@
                     <div class="single-products">
                         <div class="productinfo text-center">
                             <img src="https://eropi.com/media/wysiwyg/bo_trang_suc/bo-trang-suc-bac-love-star_2_.JPG" alt="" />
-                            <h2>$520</h2>
-                            <p>Easy Polo Black Edition</p>
-                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                        </div>
-                        
-                    </div>
-                </div>
-            </div>
-           
-        </div>
-        
-        <div class="tab-pane fade" id="sunglass" >
-            <div class="col-sm-3">
-                <div class="product-image-wrapper">
-                    <div class="single-products">
-                        <div class="productinfo text-center">
-                            <img src="public/front-end/images/home/gallery3.jpg" alt="" />
-                            <h2>$56</h2>
-                            <p>Easy Polo Black Edition</p>
-                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                        </div>
-                        
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="product-image-wrapper">
-                    <div class="single-products">
-                        <div class="productinfo text-center">
-                            <img src="public/front-end/images/home/gallery2.jpg" alt="" />
-                            <h2>$56</h2>
-                            <p>Easy Polo Black Edition</p>
-                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                        </div>
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="tab-pane fade" id="kids" >
-            <div class="col-sm-3">
-                <div class="product-image-wrapper">
-                    <div class="single-products">
-                        <div class="productinfo text-center">
-                            <img src="public/front-end/images/home/gallery1.jpg" alt="" />
-                            <h2>$56</h2>
-                            <p>Easy Polo Black Edition</p>
-                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                        </div>
-                        
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-sm-3">
-                <div class="product-image-wrapper">
-                    <div class="single-products">
-                        <div class="productinfo text-center">
-                            <img src="public/front-end/images/home/gallery4.jpg" alt="" />
-                            <h2>$56</h2>
-                            <p>Easy Polo Black Edition</p>
-                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                        </div>
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="tab-pane fade" id="poloshirt" >
-            <div class="col-sm-3">
-                <div class="product-image-wrapper">
-                    <div class="single-products">
-                        <div class="productinfo text-center">
-                            <img src="public/front-end/images/home/gallery2.jpg" alt="" />
-                            <h2>$56</h2>
-                            <p>Easy Polo Black Edition</p>
-                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                        </div>
-                        
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="product-image-wrapper">
-                    <div class="single-products">
-                        <div class="productinfo text-center">
-                            <img src="public/front-end/images/home/gallery4.jpg" alt="" />
-                            <h2>$56</h2>
-                            <p>Easy Polo Black Edition</p>
+                            <h3>$520</h3>
+                            <p style="background: #f0f0f0">Trẻ trung, năng động</p>
                             <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                         </div>
                         

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests;
+use App\Models\Comment;
+use Carbon\Carbon;
 use Symfony\Component\HttpFoundation\Session\Session;
 session_start();
 
@@ -155,7 +157,54 @@ class ProductController extends Controller
         ->join('tbl_brand_product', 'tbl_product.brand_id', '=', 'tbl_brand_product.brand_id')
         ->where('tbl_category_product.category_id', $cat_id)->get();
 
+        $rating = DB::table('tbl_rating')->where('product_id', $product_id)->avg('rating');
+        $rating = round($rating);
+
         return view('pages.product.show_details')->with('category', $cat_pd)->with('brand', $brand_pd)
-        ->with('product_details', $product_details)->with('related_product', $related_product);
+        ->with('product_details', $product_details)->with('related_product', $related_product)->with('rating',$rating);
+    }
+
+    public function load_comment(Request $request){
+        $product_id = $request->product_id;
+
+        $comment = Comment::where('comment_product_id',$product_id)->orderBy('comment_id', 'DESC')->get();
+        $output = '';
+        foreach ($comment as $key => $value) {
+            $output .= '<div class="col-sm-8" style="display: flex">
+                        <div class="col-sm-2">
+                             <img src="https://kiemtientuweb.com/ckfinder/userfiles/images/avatar-cute/avatar-cute-12.jpg" width="80" height="80" alt="">
+                        </div>
+                        <ul class="col-sm-10" style="background: #f1f1f1">
+                            <li class="comment_name">'.$value->comment_name.'</li>
+                            <li style="color: rgb(255, 81, 0)"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></li>
+                            <li class="comment_date">'.$value->comment_date.'</li>
+                            <li>'.$value->comment.'</li>
+                        </ul>
+                    </div>';
+        }
+        echo $output;
+    }
+
+    public function add_comment(Request $request)
+    {
+        $data = $request->all();
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+
+        $comment = new Comment();
+        $comment->comment = $data['add_comment'];
+        $comment->comment_name = session()->get('customer_name');
+        $comment->comment_date = $now;
+        $comment->comment_product_id = $data['product_id'];
+        $comment->save();
+    }
+
+    public function insert_rating(Request $request)
+    {
+        $data = array();
+        $data['product_id'] = $request->product_id;
+        $data['rating'] = $request->index;
+
+        DB::table('tbl_rating')->insert($data);
+        echo 'done';
     }
 }
