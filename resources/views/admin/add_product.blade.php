@@ -28,7 +28,7 @@
                         <div class="form-group">
                             <label class="col-lg-3 col-sm-3 control-label">Mô tả sản phẩm</label>
                             <div class="col-lg-9">
-                                <textarea style="resize: none" rows="3" class="form-contro" name="product_desc" id="ckeditor"></textarea>
+                                <textarea style="resize: none" rows="3" class="form-control" name="product_desc"></textarea>
                             </div>
                         </div>
                         <div class="form-group">

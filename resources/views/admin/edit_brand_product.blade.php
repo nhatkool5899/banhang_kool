@@ -30,7 +30,7 @@
                         <div class="form-group">
                             <label class="col-lg-3 col-sm-3 control-label">Logo(8:2)</label>
                             <div class="col-lg-6">
-                                <img src="{{URL::to('public/upload/brand/'.$edit_value->brand_image)}}" alt="" width="120" height="30">
+                                <img src="{{URL::to('upload/brand/'.$edit_value->brand_image)}}" alt="" width="120" height="30">
                                 <input type="file" class="form-control" name="brand_image" required>
                             </div>
                         </div>

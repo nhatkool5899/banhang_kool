@@ -17,12 +17,12 @@
                 </div>
                 <div class="item">
                     <a href="">
-                        <img src="{{asset('public/front-end/images/home/slider-banner1.png')}}" alt="">
+                        <img src="{{asset('front-end/images/home/slider-banner1.png')}}" alt="">
                     </a>
                 </div>
                 <div class="item">
                     <a href="">
-                        <img src="{{asset('public/front-end/images/home/slider-banner2.png')}}" alt="">
+                        <img src="{{asset('front-end/images/home/slider-banner2.png')}}" alt="">
                     </a>
                 </div>
                 
@@ -39,7 +39,7 @@
             </div>
 
             <div class="min-banner">
-                <img src="public/upload/banner/banner-min1.PNG" alt="">
+                <img src="upload/banner/banner-min1.PNG" alt="">
             </div>
         </div>
 

@@ -163,9 +163,9 @@ class CartController extends Controller
                 }
             }
             session()->save();
-            return redirect('/payment')->with('alert', '<span class="text-success" style="margin: 8px"><i class="fa fa-check"></i>Thêm mã thành công</span>');
+            return redirect()->back()->with('alert', '<span class="text-success" style="margin: 8px"><i class="fa fa-check"></i>Thêm mã thành công</span>');
         }else{
-            return redirect('/payment')->with('alert', '<span class="text-danger" style="margin: 8px"><i class="fa fa-warning"></i>Mã giảm giá không hợp lệ</span>');
+            return redirect()->back()->with('alert', '<span class="text-danger" style="margin: 8px"><i class="fa fa-warning"></i>Mã giảm giá không hợp lệ</span>');
         }
     }
 }

@@ -29,7 +29,7 @@
                         <div class="form-group">
                             <label class="col-lg-3 col-sm-3 control-label">Mô tả sản phẩm</label>
                             <div class="col-lg-9">
-                                <textarea style="resize: none" rows="6" class="form-control" name="product_desc" id="ckeditor">{{ $edit_value->product_desc }}</textarea>
+                                <textarea style="resize: none" rows="6" class="form-control" name="product_desc">{{ $edit_value->product_desc }}</textarea>
                             </div>
                         </div>
                         <div class="form-group">
@@ -47,7 +47,7 @@
                         <div class="form-group">
                             <label class="col-lg-3 col-sm-3 control-label">Hình ảnh(600x600)</label>
                             <div class="col-lg-6">
-                                <img src="{{URL::to('public/upload/product/'.$edit_value->product_img)}}" alt="" width="100" height="80">
+                                <img src="{{URL::to('upload/product/'.$edit_value->product_img)}}" alt="" width="100" height="80">
                                 <input type="file" class="form-control" name="product_img">
                             </div>
                         </div>

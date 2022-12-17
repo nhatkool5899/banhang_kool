@@ -17,6 +17,18 @@ class DeliveryController extends Controller
         return view('admin.delivery')->with(compact('thanhpho','quanhuyen'));
     }
 
+    public function delivery_index()
+    {
+        $feeship = feeship::all();
+        return view('admin.delivery_index', compact('feeship'));
+    }
+
+    public function delivery_delete($id)
+    {
+        feeship::find($id)->delete();
+        return redirect()->back();
+    }
+
     public function select_delivery(Request $request)
     {
         $data = $request->all();

@@ -58,7 +58,7 @@
                     <td><label class="i-checks m-b-none text-"><input type="checkbox" name="post[]"><i></i></label></td>
                     <td>{{ $cate_pro->brand_id }}</td>
                     <td>{{ $cate_pro->brand_name }}</td>
-                    <td><img src="{{asset('public/upload/product/'.$cate_pro->brand_image)}}" height="30" width="100"></td>
+                    <td><img src="{{asset('upload/product/'.$cate_pro->brand_image)}}" height="30" width="100"></td>
                     <td><span class="text-ellipsis">
                         <?php
                         if($cate_pro->brand_status == 0){

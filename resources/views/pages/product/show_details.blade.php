@@ -9,26 +9,26 @@
 
     <div class="col-sm-5">
         <div class="view-product">
-            <img src="{{URL::to('public/upload/product/'.$pd_details->product_img)}}" alt="{{$pd_details->product_img}}" />
+            <img src="{{URL::to('upload/product/'.$pd_details->product_img)}}" alt="{{$pd_details->product_img}}" />
         </div>
         <div id="similar-product" class="carousel slide" data-ride="carousel">
             
               <!-- Wrapper for slides -->
                 <div class="carousel-inner">
                     <div class="item active">
-                      <a href=""><img src="{{asset('public/front-end/images/product-details/similar1.jpg')}}" alt=""></a>
-                      <a href=""><img src="{{asset('public/front-end/images/product-details/similar2.jpg')}}" alt=""></a>
-                      <a href=""><img src="{{asset('public/front-end/images/product-details/similar3.jpg')}}" alt=""></a>
+                      <a href=""><img src="{{asset('front-end/images/product-details/similar1.jpg')}}" alt=""></a>
+                      <a href=""><img src="{{asset('front-end/images/product-details/similar2.jpg')}}" alt=""></a>
+                      <a href=""><img src="{{asset('front-end/images/product-details/similar3.jpg')}}" alt=""></a>
                     </div>
                     <div class="item">
-                      <a href=""><img src="{{asset('public/front-end/images/product-details/similar1.jpg')}}" alt=""></a>
-                      <a href=""><img src="{{asset('public/front-end/images/product-details/similar2.jpg')}}" alt=""></a>
-                      <a href=""><img src="{{asset('public/front-end/images/product-details/similar3.jpg')}}" alt=""></a>
+                      <a href=""><img src="{{asset('front-end/images/product-details/similar1.jpg')}}" alt=""></a>
+                      <a href=""><img src="{{asset('front-end/images/product-details/similar2.jpg')}}" alt=""></a>
+                      <a href=""><img src="{{asset('front-end/images/product-details/similar3.jpg')}}" alt=""></a>
                     </div>
                     <div class="item">
-                      <a href=""><img src="{{asset('public/front-end/images/product-details/similar1.jpg')}}" alt=""></a>
-                      <a href=""><img src="{{asset('public/front-end/images/product-details/similar2.jpg')}}" alt=""></a>
-                      <a href=""><img src="{{asset('public/front-end/images/product-details/similar3.jpg')}}" alt=""></a>
+                      <a href=""><img src="{{asset('front-end/images/product-details/similar1.jpg')}}" alt=""></a>
+                      <a href=""><img src="{{asset('front-end/images/product-details/similar2.jpg')}}" alt=""></a>
+                      <a href=""><img src="{{asset('front-end/images/product-details/similar3.jpg')}}" alt=""></a>
                     </div>
                     
                 </div>
@@ -46,10 +46,10 @@
   
     <div class="col-sm-7">
         <div class="product-information"><!--/product-information-->
-            <img src="{{asset('public/front-end/images/product-details/new.jpg')}}" class="newarrival" alt="" />
+            <img src="{{asset('front-end/images/product-details/new.jpg')}}" class="newarrival" alt="" />
             <h2>{{$pd_details->product_name}}</h2>
             <p>Mã SP: {{$pd_details->product_id}}</p>
-            <img src="{{asset('public/front-end/images/product-details/rating.png')}}" alt="" />
+            <img src="{{asset('front-end/images/product-details/rating.png')}}" alt="" />
             <form>
                 {{ csrf_field() }}
                 <input type="hidden" value="{{$pd_details->product_quantity}}" class="check_product_qty_{{$pd_details->product_id}}">
@@ -76,7 +76,7 @@
             <p><b>Hệ điều hành:</b> IOS 15</p>
             <p><b>Thương hiệu:</b> {{$pd_details->brand_name}}</p>
             <p><b>Danh mục:</b> {{$pd_details->category_name}}</p>
-            <a href=""><img src="{{asset('public/front-end/images/product-details/share.png')}}" class="share img-responsive"  alt="" /></a>
+            <a href=""><img src="{{asset('front-end/images/product-details/share.png')}}" class="share img-responsive"  alt="" /></a>
         </div><!--/product-information-->
     </div>
 </div><!--/product-details-->
@@ -185,7 +185,7 @@
             
                                     <a href="{{URL::to('chi-tiet-san-pham/'.$related_pd->product_id)}}" class="link-product-details">
                                     </a>
-                                    <img src="{{URL::to('public/upload/product/'.$related_pd->product_img)}}" alt="" />
+                                    <img src="{{URL::to('upload/product/'.$related_pd->product_img)}}" alt="" />
                                     <div class="product-info-details">
                                         <p>{{$related_pd->product_name}}</p>
                                         <div class="product-price-sold">
@@ -194,7 +194,7 @@
                                         </div>
                                         <div class="product-rate-cart">
                                             <div class="product-rate">
-                                                <img style="width:75%; margin-top:0" src="{{asset('public/front-end/images/product-details/rating.png')}}" alt=""/>
+                                                <img style="width:75%; margin-top:0" src="{{asset('front-end/images/product-details/rating.png')}}" alt=""/>
                                                 <span style="color: #ccc; margin-left:4px">10</span>
                                             </div>
                                             <button type="button" class="btn btn-default add-to-cart" data-id_product="{{$related_pd->product_id}}" name="add-to-cart"><i class="fa-solid fa-cart-plus"></i></button>
@@ -221,7 +221,7 @@
                     <div class="product-image-wrapper">
                         <div class="single-products">
                             <div class="productinfo text-center">
-                                <img src="public/front-end/images/home/recommend1.jpg" alt="" />
+                                <img src="front-end/images/home/recommend1.jpg" alt="" />
                                 <h2>$56</h2>
                                 <p>Easy Polo Black Edition</p>
                                 <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>

@@ -11,15 +11,15 @@
     <meta name="author" content="">
 	{{-- Seo --}}
     <title>Home | E-Shopper</title>
-    <link href="{{asset('public/front-end/css/bootstrap4.min.css')}}" rel="stylesheet">
-    <link href="{{asset('public/front-end/css/all.min.css')}}" rel="stylesheet">
-    <link href="{{asset('public/front-end/css/prettyPhoto.css')}}" rel="stylesheet">
-    <link href="{{asset('public/front-end/css/price-range.css')}}" rel="stylesheet">
-    <link href="{{asset('public/front-end/css/animate.css')}}" rel="stylesheet">
-	<link href="{{asset('public/front-end/css/main.css')}}" rel="stylesheet">
-	<link href="{{asset('public/front-end/css/responsive.css')}}" rel="stylesheet">
-	<link href="{{asset('public/front-end/css/style_sign8.css')}}" rel="stylesheet">
-	<link href="{{asset('public/front-end/css/sweetalert.css')}}" rel="stylesheet">      
+    <link href="{{asset('front-end/css/bootstrap4.min.css')}}" rel="stylesheet">
+    <link href="{{asset('front-end/css/all.min.css')}}" rel="stylesheet">
+    <link href="{{asset('front-end/css/prettyPhoto.css')}}" rel="stylesheet">
+    <link href="{{asset('front-end/css/price-range.css')}}" rel="stylesheet">
+    <link href="{{asset('front-end/css/animate.css')}}" rel="stylesheet">
+	<link href="{{asset('front-end/css/main1.css')}}" rel="stylesheet">
+	<link href="{{asset('front-end/css/responsive.css')}}" rel="stylesheet">
+	<link href="{{asset('front-end/css/style_sign9.css')}}" rel="stylesheet">
+	<link href="{{asset('front-end/css/sweetalert.css')}}" rel="stylesheet">      
 </head><!--/head-->
 
 <body>
@@ -39,7 +39,7 @@
 								</div>
 							</div>
 							<div class="col-sm-7">
-								<img style="width:100%; height:44px" src="{{asset('public/upload/banner/banner-min2.PNG')}}" alt="">
+								<img style="width:100%; height:44px" src="{{asset('upload/banner/banner-min2.PNG')}}" alt="">
 							</div>
 							<div class="col-sm-1" style="height:44px; width:15%; padding: 0">
 								<div class="social-icons pull-right">
@@ -60,7 +60,7 @@
 						<div class="row">
 							<div class="col-sm-2 header-middle-child">
 								<div class="logo pull-left">
-									<a href="{{URL::to('/trang-chu')}}"><img src="{{asset('public/front-end/images/home/logo.png')}}" alt="" /></a>
+									<a href="{{URL::to('/trang-chu')}}"><img src="{{asset('front-end/images/home/logo.png')}}" alt="" /></a>
 								</div>
 							</div>
 							<div class="col-sm-4 header-middle-child" style="display: flex; padding: 0">
@@ -172,8 +172,8 @@
 											</div>
 											<a href="#" class="forgot">Forgot Password?</a>
 											<div class="login-more">
-												<a><img style="width: 32px; height:32px" src="{{asset('public/front-end/images/home/googles_icon.png')}}" alt="">Google</a>
-												<a><img src="{{asset('public/front-end/images/home/facebook_icon.png')}}" alt="">Facebook</a>
+												<a><img style="width: 32px; height:32px" src="{{asset('front-end/images/home/googles_icon.png')}}" alt="">Google</a>
+												<a><img src="{{asset('front-end/images/home/facebook_icon.png')}}" alt="">Facebook</a>
 											</div>
 										</form>
 									</div>
@@ -252,21 +252,21 @@
 											<span>Thông báo</span>
 											<ul class="notice-box">
 												<li><a href="" class="notice-item">
-													<img src="{{asset('public/front-end/images/home/notice-sale.jpg')}}" alt="">
+													<img src="{{asset('front-end/images/home/notice-sale.jpg')}}" alt="">
 													<div class="notice-content">
 														<div>Săn sale lớn nhân ngày 30/4</div>
 														<div class="notice-date">20:10:2022</div>
 													</div>
 												</a></li>
 												<li><a href="" class="notice-item">
-													<img src="{{asset('public/front-end/images/home/notice-sale1.jpg')}}" alt="">
+													<img src="{{asset('front-end/images/home/notice-sale1.jpg')}}" alt="">
 													<div class="notice-content">
 														<div>Săn sale lớn trong năm nhân dịp quốc khánh 2/9</div>
 														<div class="notice-date">20:10:2022</div>
 													</div>
 												</a></li>
 												<li><a href="" class="notice-item">
-													<img src="{{asset('public/front-end/images/home/notice-sale2.jpg')}}" alt="">
+													<img src="{{asset('front-end/images/home/notice-sale2.jpg')}}" alt="">
 													<div class="notice-content">
 														<div>Siêu sale điện thoại bùng nổ, rinh ngay kẻo lỡ</div>
 														<div class="notice-date">20:10:2022</div>
@@ -488,20 +488,61 @@
 			</div>
 			
 		</footer><!--/Footer-->
+
+		<style>
+			.float-contact {
+				position: fixed;
+				bottom: 50px;
+				right: 20px;
+				z-index: 99999;
+			}
+			.chat-zalo {
+				display: block;
+				margin-bottom: 20px;
+				line-height: 0;
+				position: relative;
+				animation: tada 4s ease-in-out infinite;
+			}
+			.chat-zalo::after{
+    			content: "";
+				position: absolute;
+				right: -3px;
+				top: -3px;
+				height: 45px;
+				width: 45px;
+				border-radius: 50%;
+				animation: scale 4s ease-in-out infinite;
+				background-color: rgba(19, 61, 175, 0.4);
+				z-index: -1;
+			}
+			@keyframes tada {
+				0% {transform: scale(1);}	
+				10%, 20% {transform: rotate(-3deg);}
+				30%, 50%, 70%, 90% {transform:rotate(3deg);}
+				40%, 60%, 80% {transform: rotate(-3deg);}
+				100% {transform: scale(1) rotate(0);}
+			}
+		</style>
+
+		<div class="float-contact">
+            <div class="chat-zalo">
+                <a href="https://zalo.me/0907977341" target="_blank"><img title="Chat Zalo" src="{{asset('front-end/images/zalo-icon.png')}}" alt="zalo-icon" width="40" height="40" /></a>
+            </div>
+        </div>
 	</div>
 	
 
   
-    <script src="{{asset('public/front-end/js/jquery.js')}}"></script>
-	<script src="{{asset('public/front-end/js/bootstrap.min.js')}}"></script>
-	<script src="{{asset('public/front-end/js/all.min.js')}}"></script>
-	<script src="{{asset('public/front-end/js/jquery.scrollUp.min.js')}}"></script>
-	<script src="{{asset('public/front-end/js/price-range.js')}}"></script>
-    <script src="{{asset('public/front-end/js/jquery.prettyPhoto.js')}}"></script>
-    <script src="{{asset('public/front-end/js/main.js')}}"></script>
-    <script src="{{asset('public/front-end/js/sweetalert.js')}}"></script>
-    <script src="{{asset('public/front-end/js/weather.js')}}"></script>
-    <script src="{{asset('public/front-end/js/validator.js')}}"></script>
+    <script src="{{asset('front-end/js/jquery.js')}}"></script>
+	<script src="{{asset('front-end/js/bootstrap.min.js')}}"></script>
+	<script src="{{asset('front-end/js/all.min.js')}}"></script>
+	<script src="{{asset('front-end/js/jquery.scrollUp.min.js')}}"></script>
+	<script src="{{asset('front-end/js/price-range.js')}}"></script>
+    <script src="{{asset('front-end/js/jquery.prettyPhoto.js')}}"></script>
+    <script src="{{asset('front-end/js/main.js')}}"></script>
+    <script src="{{asset('front-end/js/sweetalert.js')}}"></script>
+    <script src="{{asset('front-end/js/weather.js')}}"></script>
+    <script src="{{asset('front-end/js/validator.js')}}"></script>
 
 
 	{{-- <div class="zalo-chat-widget" data-oaid="579745863508352884" data-welcome-message="Chào bạn!" data-autopopup="10" data-width="" data-height=""></div>

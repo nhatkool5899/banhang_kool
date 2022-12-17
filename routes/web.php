@@ -149,6 +149,8 @@ Route::get('/ordered/{customer_id}', [OrderController::class, 'ordered']);
 //Delivery
 
 Route::get('/delivery', [DeliveryController::class, 'delivery']);
+Route::get('/delivery/index', [DeliveryController::class, 'delivery_index']);
+Route::get('/delivery/delete/{id}', [DeliveryController::class, 'delivery_delete']);
 Route::post('/select-delivery', [DeliveryController::class, 'select_delivery']);
 Route::post('/insert-delivery', [DeliveryController::class, 'insert_delivery']);
 Route::get('/update-delivery', [DeliveryController::class, 'update_delivery']);

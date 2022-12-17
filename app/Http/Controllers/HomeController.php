@@ -39,9 +39,9 @@ class HomeController extends Controller
         $sort_by = $request->sort_by;
        
         if($sort_by == 'giam_dan'){
-            $pd = DB::table('tbl_product')->where('category_id', 1)->where('product_status', 0)->orderBy('product_price', 'DESC')->get();
+            $pd = DB::table('tbl_product')->where('category_id', 1)->orderByRaw('CAST(product_price as DECIMAL(12,2)) DESC')->get();
         }elseif($sort_by=='tang_dan'){
-            $pd = DB::table('tbl_product')->where('category_id', 1)->where('product_status', 0)->orderBy('product_price', 'ASC')->get();
+            $pd = DB::table('tbl_product')->where('category_id', 1)->where('product_status', 0)->orderByRaw('CAST(product_price as DECIMAL(12,2)) ASC')->get();
         }elseif($sort_by=='kytu_az'){
             $pd = DB::table('tbl_product')->where('category_id', 1)->where('product_status', 0)->orderBy('product_name', 'ASC')->get();
         }elseif($sort_by=='kytu_za'){
@@ -49,6 +49,9 @@ class HomeController extends Controller
         }else{
             $pd ='';
         }
+        // echo '<pre>';
+        // print_r($pd);
+        // echo '</pre>';
 
         return view('pages.product.sort_product')->with('category', $cat_pd)->with('brand', $brand_pd)->with('sort_product', $pd);
     }
@@ -61,7 +64,10 @@ class HomeController extends Controller
         if(isset($_GET['start_price']) && isset($_GET['end_price'])){
             $start_price = $_GET['start_price']."000000";
             $end_price = $_GET['end_price']."000000";
-            $pd = DB::table('tbl_product')->whereBetween('product_price', [(int)$start_price,(int)$end_price])->orderBy('product_price','ASC')->get();
+            // echo '<pre>';
+            // print_r($pd);
+            // echo '</pre>';
+            $pd = DB::table('tbl_product')->whereBetween('product_price', [(int)$start_price,(int)$end_price])->orderByRaw('CAST(product_price as DECIMAL(12,2)) ASC')->get();
             return view('pages.product.sort_product')->with('category', $cat_pd)->with('brand', $brand_pd)->with('sort_product', $pd);
         }else{
             return view('pages.product.sort_product')->with('category', $cat_pd)->with('brand', $brand_pd);
@@ -92,7 +98,7 @@ class HomeController extends Controller
             $output = '<ul class="suggest-menu">';
             
             foreach ($product as $key => $value) {
-                $output .= '<li class="suggest-item"><a href="">'.$value->product_name.'</a></li>';
+                $output .= '<li class="suggest-item"><a href="'.url("chi-tiet-san-pham/".$value->product_id).'">'.$value->product_name.'</a></li>';
             }
 
             $output .= '</ul>';

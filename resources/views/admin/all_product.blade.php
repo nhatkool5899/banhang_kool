@@ -65,7 +65,7 @@
                     <td>{{ $product->brand_name }}</td>
                     <td>{{ $product->product_quantity }}</td>
                     <td>{{ $product->product_price }}</td>
-                    <td><img src="public/upload/product/{{ $product->product_img }}" height="60" width="80"></td>
+                    <td><img src="upload/product/{{ $product->product_img }}" height="60" width="80"></td>
                     <td><span class="text-ellipsis">
                         <?php
                         if($product->product_status == 0){

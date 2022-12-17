@@ -28,7 +28,7 @@
 
                         <a href="{{URL::to('chi-tiet-san-pham/'.$product->product_id)}}" class="link-product-details">
                         </a>
-                        <img src="{{URL::to('public/upload/product/'.$product->product_img)}}" alt="" />
+                        <img src="{{URL::to('upload/product/'.$product->product_img)}}" alt="" />
                         <div class="product-info-details">
                             <p>{{$product->product_name}}</p>
                             <div class="product-price-sold">
@@ -37,7 +37,7 @@
                             </div>
                             <div class="product-rate-cart">
                                 <div class="product-rate">
-                                    <img style="width:75%; margin-top:0" src="{{asset('public/front-end/images/product-details/rating.png')}}" alt=""/>
+                                    <img style="width:75%; margin-top:0" src="{{asset('front-end/images/product-details/rating.png')}}" alt=""/>
                                     <span style="color: #ccc; margin-left:4px">10</span>
                                 </div>
                                 <button type="button" class="btn btn-default add-to-cart" data-id_product="{{$product->product_id}}" name="add-to-cart"><i class="fa-solid fa-cart-plus"></i></button>

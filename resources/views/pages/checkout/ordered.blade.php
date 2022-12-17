@@ -53,10 +53,10 @@
 
                         <div class="order-details">
                             <div class="order-details-info">
-                                <span><img src="{{URL::to('public/upload/product/'.$ordered_details->product_image)}}" alt=""></span>
+                                <span><img src="{{URL::to('upload/product/'.$ordered_details->product_image)}}" alt=""></span>
                                 <ul>
                                     <li>{{$ordered_details->product_name}}</li>
-                                    <li>{!!$ordered_details->product_desc!!}</li>
+                                    <li>{!! Str::limit($ordered_details->product_desc, 40)!!}</li>
                                     <li style="text-transform: none">Số lượng: {{$ordered_details->product_order_quantity}}</li>
                                 </ul>
                             </div>

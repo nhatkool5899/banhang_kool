@@ -13,26 +13,26 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- bootstrap-css -->
-<link rel="stylesheet" href="{{asset('public/back-end/css/bootstrap.min.css')}}" >
+<link rel="stylesheet" href="{{asset('back-end/css/bootstrap.min.css')}}" >
 <!-- //bootstrap-css -->
 <!-- Custom CSS -->
-<link href="{{asset('public/back-end/css/style2.css')}}" rel='stylesheet' type='text/css' />
-<link href="{{asset('public/back-end/css/style-responsive.css')}}" rel="stylesheet"/>
-<link href="{{asset('public/back-end/css/style_dashboard.css')}}" rel="stylesheet"/>
+<link href="{{asset('back-end/css/style2.css')}}" rel='stylesheet' type='text/css' />
+<link href="{{asset('back-end/css/style-responsive.css')}}" rel="stylesheet"/>
+<link href="{{asset('back-end/css/style_dashboard.css')}}" rel="stylesheet"/>
 <!-- font CSS -->
 <link href='//fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 <!-- font-awesome icons -->
-<link rel="stylesheet" href="{{asset('public/back-end/css/font.css')}}" type="text/css"/>
-<link href="{{asset('public/back-end/css/font-awesome.css')}}" rel="stylesheet"> 
-<link rel="stylesheet" href="{{asset('public/back-end/css/morris.css')}}" type="text/css"/>
+<link rel="stylesheet" href="{{asset('back-end/css/font.css')}}" type="text/css"/>
+<link href="{{asset('back-end/css/font-awesome.css')}}" rel="stylesheet"> 
+<link rel="stylesheet" href="{{asset('back-end/css/morris.css')}}" type="text/css"/>
 <!-- calendar -->
-<link rel="stylesheet" href="{{asset('public/back-end/css/monthly.css')}}">
+<link rel="stylesheet" href="{{asset('back-end/css/monthly.css')}}">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
 <!-- //calendar -->
 <!-- //font-awesome icons -->
-<script src="{{asset('public/back-end/js/jquery2.0.3.min.js')}}"></script>
-<script src="{{asset('public/back-end/js/raphael-min.js')}}"></script>
-<script src="{{asset('public/back-end/js/morris.js')}}"></script>
+<script src="{{asset('back-end/js/jquery2.0.3.min.js')}}"></script>
+<script src="{{asset('back-end/js/raphael-min.js')}}"></script>
+<script src="{{asset('back-end/js/morris.js')}}"></script>
 </head>
 <body id="body-admin">
 <section id="container">
@@ -57,7 +57,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <!-- user login dropdown start-->
         <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                <img alt="" src="{{asset('public/back-end/images/2.png')}}">
+                <img alt="" src="{{asset('back-end/images/2.png')}}">
                 <span class="username">
 					<?php
 					$admin_name = Session::get('admin_name');
@@ -154,7 +154,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <span>Vận chuyển</span>
                     </a>
                     <ul class="sub">
-						<li><a href="{{URL::to('/delivery')}}">Quản lý vận chuyển</a></li>
+						<li><a href="{{URL::to('/delivery')}}">Thêm phí vận chuyển</a></li>
+						<li><a href="{{URL::to('/delivery/index')}}">Danh sách phí</a></li>
                     </ul>
                 </li>
                 
@@ -180,14 +181,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </section>
 <!--main content end-->
 </section>
-<script src="{{asset('public/back-end/js/bootstrap.js')}}"></script>
-<script src="{{asset('public/back-end/js/jquery.dcjqaccordion.2.7.js')}}"></script>
-<script src="{{asset('public/back-end/js/scripts.js')}}"></script>
-<script src="{{asset('public/back-end/js/jquery.slimscroll.js')}}"></script>
-<script src="{{asset('public/back-end/js/jquery.nicescroll.js')}}"></script>
-<script src="{{asset('public/back-end/js/jquery.scrollTo.js')}}"></script>
-<script src="{{asset('public/back-end/ckeditor/ckeditor.js')}}"></script>
-<script src="{{asset('public/back-end/js/jquery.validate.js')}}"></script>
+<script src="{{asset('back-end/js/bootstrap.js')}}"></script>
+<script src="{{asset('back-end/js/jquery.dcjqaccordion.2.7.js')}}"></script>
+<script src="{{asset('back-end/js/scripts.js')}}"></script>
+<script src="{{asset('back-end/js/jquery.slimscroll.js')}}"></script>
+<script src="{{asset('back-end/js/jquery.nicescroll.js')}}"></script>
+<script src="{{asset('back-end/js/jquery.scrollTo.js')}}"></script>
+<script src="{{asset('back-end/ckeditor/ckeditor.js')}}"></script>
+<script src="{{asset('back-end/js/jquery.validate.js')}}"></script>
 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 <!-- morris JavaScript -->	
 

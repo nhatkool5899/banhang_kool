@@ -44,7 +44,7 @@
 
                         <tr>
                             <td class="cart_product">
-                                <a href=""><img width="90" src="{{URL::to('public/upload/product/'.$cart['product_image'])}}" alt=""></a>
+                                <a href=""><img width="90" src="{{URL::to('upload/product/'.$cart['product_image'])}}" alt=""></a>
                             </td>
                             <td class="cart_description">
                                 <h4><a href="">{{$cart['product_name']}}</a></h4>
@@ -197,7 +197,7 @@
                             <tr>
                                 <td></td>
                                 <td></td>
-                                <td colspan="2"><img src="{{asset('public/front-end/images/cart/cart-empty.png')}}" alt=""></td>
+                                <td colspan="2"><img src="{{asset('front-end/images/cart/cart-empty.png')}}" alt=""></td>
                             </tr>
                             <tr>
                                 <td></td>
